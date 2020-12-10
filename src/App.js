@@ -8,6 +8,7 @@ import { getQuestions } from "./FetchQuestions";
 
 const App = (props) => {
     const [questions, setQuestions] = useState([]);
+    // const [currentQuestion, setCurrentQuestion] = useState(0);
 
     useEffect(() => {
         fetchQuestions();
@@ -18,14 +19,29 @@ const App = (props) => {
         setQuestions(res.results);
     };
 
-    console.log(questions);
+    // const handleClick = () => {
+    //     const nextQuestion = currentQuestion + 1;
+    //     if (nextQuestion < questions.length) {
+    //         setCurrentQuestion(nextQuestion);
+    //     }else {
+    //         return;
+    //     }
+    // };
+
     return (
         <div className="App">
-            <Header totalQuestions={questions.length ? questions.length : "Loading..."} />
-			{questions.length > 0 ? 
-            	<Question currentQuestion={questions[0]}/>
-				: <h1 className="loader">Loading....</h1>
-			}
+            <Header
+                totalQuestions={
+                    questions.length ? questions.length : "Loading..."
+                }
+            />
+            {questions.length > 0 ? (
+                <Question
+                    questions={questions}
+                />
+            ) : (
+                <h1 className="loader">Loading....</h1>
+            )}
         </div>
     );
 };
