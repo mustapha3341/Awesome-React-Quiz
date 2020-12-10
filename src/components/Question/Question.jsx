@@ -3,7 +3,17 @@ import React from "react";
 const Question = (props) => {
     return (
         <div className="question">
-            <h1>Question</h1>
+            <div className="question--box">
+                <p>
+                   {props.currentQuestion.question}
+                </p>
+            </div>
+            <div className="answers--container">
+                <button className="answer">Answer</button>
+                <button className="answer">Answer</button>
+                <button className="answer">Answer</button>
+                <button className="answer">Answer</button>
+            </div>
         </div>
     );
 };
