@@ -4,29 +4,22 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Question from "./components/Question/Question";
 
-import { getQuestions } from "./FetchQuestions";
 
-const App = (props) => {
+const App = () => {
     const [questions, setQuestions] = useState([]);
-    // const [currentQuestion, setCurrentQuestion] = useState(0);
 
     useEffect(() => {
-        fetchQuestions();
+        const url =
+            "https://opentdb.com/api.php?amount=20&category=9&difficulty=easy&type=multiple";
+            fetch(url).then(response => {
+                return response.json()
+            }).then(data => {
+                setQuestions(data.results);
+            }).catch(error => {
+                throw new Error("Error connecting to server" + error);
+            })
     }, []);
 
-    const fetchQuestions = async () => {
-        const res = await getQuestions();
-        setQuestions(res.results);
-    };
-
-    // const handleClick = () => {
-    //     const nextQuestion = currentQuestion + 1;
-    //     if (nextQuestion < questions.length) {
-    //         setCurrentQuestion(nextQuestion);
-    //     }else {
-    //         return;
-    //     }
-    // };
 
     return (
         <div className="App">
@@ -40,7 +33,7 @@ const App = (props) => {
                     questions={questions}
                 />
             ) : (
-                <h1 className="loader">Loading....</h1>
+                <h1 className="loader">Loading....🤓</h1>
             )}
         </div>
     );
