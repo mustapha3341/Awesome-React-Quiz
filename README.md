@@ -1,11 +1,11 @@
 # Awesome quiz application
 
-#Features 
-
-[] user can select answer 
-[] user can navigate back and forth between questions
-[] user can retry after taking the  quiz
-[] user gets a score after answering all questions
+>#Features 
+>
+> - [x] user can select answer 
+> - [x] user can navigate back and forth between questions
+> - [x] user can retry after taking the  quiz
+> - [x] user gets a score after answering all questions
 ## Available Scripts
 
 In the project directory, you can run:
