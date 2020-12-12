@@ -101,6 +101,34 @@ ul {
     margin: 4em auto;
 }
 
+.next--question-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0;
+}
+
+.next--question-btn > * + * {
+    margin-left: 1em;
+}
+
+.next--btn,
+.prev--btn {
+    border: none;
+    padding: 0.75em 1.5em;
+    outline: #9c92ac;
+    color: whitesmoke;
+    background: #9c92ac;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.selected {
+    background: #9c92ac;
+    color: whitesmoke;
+    outline: #dfdbe5;
+}
+
 @media (max-width: 700px) {
     .question {
         width: 80%;

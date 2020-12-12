@@ -4,39 +4,42 @@ import { shuffle } from "lodash";
 const Question = ({ questions }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
-    const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [correctAnswer, setCorrectAnswer] = useState("");
+    const [selected, setSelected] = useState(null);
 
     const shuffledAnswers = useCallback(() => {
         const { correct_answer, incorrect_answers } = questions[
             currentQuestion
         ];
         const answers = shuffle([correct_answer, ...incorrect_answers]);
-        return answers;
-    }, [questions,currentQuestion]);
-    
+        setAnswers(answers);
+    }, [questions, currentQuestion]);
 
     useEffect(() => {
-        const ans = shuffledAnswers();
-        setAnswers(ans);
-    }, [shuffledAnswers])
-
-    const handleClick = (index) => {
         shuffledAnswers();
-        setSelectedAnswer(answers[index]);
+    }, [shuffledAnswers]);
 
-        // check if answer is correct
-        if(selectedAnswer === questions[currentQuestion].correct_answer) {
-            setCorrectAnswer(selectedAnswer);
-            alert("WHoaahh!!!! 😁");
-        }
-
+    const handleNext = () => {
+        setSelected(null);
         const nextQuestion = currentQuestion + 1;
         if (nextQuestion < questions.length) {
             setCurrentQuestion(nextQuestion);
         } else {
             return;
         }
+    };
+
+    const handlePrev = () => {
+        const prevQuestion = currentQuestion - 1;
+        if (prevQuestion < 0) {
+            return;
+        } else {
+            setCurrentQuestion(prevQuestion);
+        }
+    };
+
+    const handleSelected = (index) => {
+        const sel = answers[index];
+        setSelected(sel);
     };
 
     return (
@@ -51,12 +54,24 @@ const Question = ({ questions }) => {
             <div className="answers--container">
                 {answers.map((answer, index) => (
                     <button
-                        onClick={() => handleClick(index)}
+                        onClick={() => {
+                            handleSelected(index);
+                        }}
                         key={answer}
                         dangerouslySetInnerHTML={{ __html: answer }}
-                        className="answer"
+                        className={`answer ${
+                            selected === answer ? `selected` : ""
+                        }`}
                     ></button>
                 ))}
+            </div>
+            <div className="next--question-btn">
+                <button onClick={handlePrev} className="next--btn">
+                    Prev
+                </button>
+                <button onClick={handleNext} className="prev--btn">
+                    Next
+                </button>
             </div>
         </div>
     );
