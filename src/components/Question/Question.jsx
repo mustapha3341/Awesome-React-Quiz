@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { shuffle } from "lodash";
 import ShowScore from "../ShowScore/ShowScore";
 
-const Question = ({ questions }) => {
+const Question = ({ questions, setCount }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [selected, setSelected] = useState(null);
@@ -29,6 +29,7 @@ const Question = ({ questions }) => {
         } else {
             setShowScore(true);
         }
+        setCount(nextQuestion);
     };
 
     const handlePrev = () => {

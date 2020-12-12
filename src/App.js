@@ -7,6 +7,7 @@ import Question from "./components/Question/Question";
 
 const App = () => {
     const [questions, setQuestions] = useState([]);
+    const [currentQuestionCount, setCurrentQuestionCount] = useState(0);
 
     useEffect(() => {
         const url =
@@ -20,6 +21,10 @@ const App = () => {
             })
     }, []);
 
+    const setCount = (count) => {
+        setCurrentQuestionCount(count);
+    }
+
 
     return (
         <div className="App">
@@ -27,10 +32,12 @@ const App = () => {
                 totalQuestions={
                     questions.length ? questions.length : "Loading..."
                 }
+                count={currentQuestionCount}
             />
             {questions.length > 0 ? (
                 <Question
                     questions={questions}
+                    setCount={setCount}
                 />
             ) : (
                 <h1 className="loader">Loading....🤓</h1>
