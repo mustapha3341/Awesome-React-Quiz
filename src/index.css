@@ -113,7 +113,8 @@ ul {
 }
 
 .next--btn,
-.prev--btn {
+.prev--btn,
+.retry {
     border: none;
     padding: 0.75em 1.5em;
     outline: #9c92ac;
@@ -127,6 +128,13 @@ ul {
     background: #9c92ac;
     color: whitesmoke;
     outline: #dfdbe5;
+}
+
+.show--score {
+    width: 100%;
+    display: grid;
+    gap: 1em;
+    text-align: center;
 }
 
 @media (max-width: 700px) {
